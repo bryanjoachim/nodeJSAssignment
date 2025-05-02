@@ -1,49 +1,31 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_ENV = 'development'
+    tools {
+        nodejs 'node18'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Clones the repository
-                git url: 'https://github.com/bryanjoachim/nodeJSAssignment.git', branch: 'main'
+                echo 'Cloning the repository...'
+                git branch: 'main', url: 'https://github.com/bryanjoachim/github_actions.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Installs project dependencies
+                echo 'Installing npm dependencies...'
                 sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                // Runs unit tests
+                echo 'Running tests...'
                 sh 'npm test'
             }
         }
-
-        stage('Build') {
-            steps {
-                // Optional: Run build script if defined in package.json
-                sh 'npm run build'
-            }
-        }
     }
 
-    post {
-        always {
-            echo 'Pipeline completed.'
-        }
-        success {
-            echo 'Build and tests successful!'
-        }
-        failure {
-            echo 'Something went wrong.'
-        }
-    }
 }
