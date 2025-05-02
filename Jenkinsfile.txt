@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning the repository...'
-                git branch: 'main', url: 'https://github.com/bryanjoachim/github_actions.git'
+                git branch: 'main', url: 'https://github.com/bryanjoachim/nodeJSAssignment.git'
             }
         }
 
